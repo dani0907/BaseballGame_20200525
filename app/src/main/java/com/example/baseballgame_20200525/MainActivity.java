@@ -22,11 +22,15 @@ public class MainActivity extends BaseActivity {
 //    문제로 사용될 3자리 숫자 배열
     int[] questionArr = new int[3];
 
+//    정답입력횟수
+    int tryCount = 0;
+
 //    채팅 내역으로 사용할 ArrayList
     List<Message> messages = new ArrayList<>();
 
 //    Adapter를 변수로 만들고 실제 활용 => onCreate이후에 객체화.
     MessageAdapter messageAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,8 @@ public class MainActivity extends BaseActivity {
 //                리스트뷰를 맨 밑으로 끌어내려주자.
                 binding.messageListView.smoothScrollToPosition(messages.size()-1);
 
+//                올바른 입력이 들어오면 시도 횟수 증가 처리.
+                tryCount++;
 //                ?S??B인지 계산하고 답장.
                 checkStrikeAndBalls(inputValue);
             }
@@ -158,5 +164,24 @@ public class MainActivity extends BaseActivity {
         messages.add(new Message(String.format("%dS %dB 입니다.",strikeCount,ballCount),"Cpu"));
         messageAdapter.notifyDataSetChanged();
         binding.messageListView.smoothScrollToPosition(messages.size()-1);
+
+
+//        3s라면 축하메세지 + 몇번만에 맞췄는지 + 입력불가하도록 막아주기.
+        if(strikeCount==3){
+            messages.add(new Message("정답입니다","Cpu"));
+            messages.add(new Message(String.format("%d회만에 맞췄습니다.",tryCount),"Cpu"));
+
+            messageAdapter.notifyDataSetChanged();
+            binding.messageListView.smoothScrollToPosition(messages.size()-1);
+
+
+//            EditText와 버튼을 더이상 사용하지 못하도록 막아주는 enabled false코드.
+            binding.numEdt.setEnabled(false);
+            binding.sendBtn.setEnabled(false);
+
+//            종료 안내 토스트.
+            Toast.makeText(mContext, "이용해 주셔서 감사합니다.", Toast.LENGTH_SHORT).show();
+
+        }
     }
 }
