@@ -2,7 +2,9 @@ package com.example.baseballgame_20200525;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 public class SplashActivity extends BaseActivity {
 
@@ -21,6 +23,15 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void setValues() {
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent myIntent = new Intent(mContext,MainActivity.class);
+                startActivity(myIntent);
+                finish();
+            }
+        },2000);
 
     }
 }
