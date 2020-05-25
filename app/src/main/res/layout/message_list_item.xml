@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <FrameLayout
+        android:id="@+id/myMessageLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
@@ -20,6 +21,7 @@
             android:text="User 대사"/>
     </FrameLayout>
     <FrameLayout
+        android:id="@+id/cpuMessageLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
