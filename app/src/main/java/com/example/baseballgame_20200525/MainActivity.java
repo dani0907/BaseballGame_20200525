@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -160,10 +161,21 @@ public class MainActivity extends BaseActivity {
 
         }
 
+
+        final int copyStrike = strikeCount;
+        final int copyBall = ballCount;
+        Handler myHandler = new Handler();
+        myHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
 //        컴퓨터가 ?s?b인지 답장하고, 밑으로 끌어내리기.
-        messages.add(new Message(String.format("%dS %dB 입니다.",strikeCount,ballCount),"Cpu"));
-        messageAdapter.notifyDataSetChanged();
-        binding.messageListView.smoothScrollToPosition(messages.size()-1);
+                messages.add(new Message(String.format("%dS %dB 입니다.",copyStrike,copyBall),"Cpu"));
+                messageAdapter.notifyDataSetChanged();
+                binding.messageListView.smoothScrollToPosition(messages.size()-1);
+            }
+        },500);
+
 
 
 //        3s라면 축하메세지 + 몇번만에 맞췄는지 + 입력불가하도록 막아주기.
