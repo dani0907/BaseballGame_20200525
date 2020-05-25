@@ -71,6 +71,8 @@ public class MainActivity extends BaseActivity {
                 tryCount++;
 //                ?S??B인지 계산하고 답장.
                 checkStrikeAndBalls(inputValue);
+
+                binding.numEdt.setText("");
             }
         });
 
