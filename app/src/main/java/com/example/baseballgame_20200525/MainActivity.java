@@ -6,7 +6,12 @@ import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.baseballgame_20200525.adapters.MessageAdapter;
 import com.example.baseballgame_20200525.databinding.ActivityMainBinding;
+import com.example.baseballgame_20200525.datas.Message;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
@@ -14,6 +19,12 @@ public class MainActivity extends BaseActivity {
 
 //    문제로 사용될 3자리 숫자 배열
     int[] questionArr = new int[3];
+
+//    채팅 내역으로 사용할 ArrayList
+    List<Message> messages = new ArrayList<>();
+
+//    Adapter를 변수로 만들고 실제 활용 => onCreate이후에 객체화.
+    MessageAdapter messageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +42,11 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void setValues() {
+
+        messageAdapter = new MessageAdapter(mContext,R.layout.message_list_item,messages);
+        binding.messageListView.setAdapter(messageAdapter);
+
+        makeQuestion();
 
     }
 
@@ -65,5 +81,14 @@ public class MainActivity extends BaseActivity {
         for(int num : questionArr){
             Log.d("문제 숫자", num +"");
         }
+
+//        컴퓨터가 사람에게 환영 메세지.
+
+        messages.add(new Message("숫자 야구게임에 오신 것을 환영합니다.","Cpu"));
+        messages.add(new Message("세 자리 숫자를 맞춰주세요.","Cpu"));
+        messages.add(new Message("1~9만 출제되며, 중복된 숫자는 없습니다.","Cpu"));
+
+//        어댑터가 사용하는 list의 내용 변경 (메세지추가)이 생겼으니 새로고침.
+        messageAdapter.notifyDataSetChanged();
     }
 }

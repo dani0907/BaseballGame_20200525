@@ -17,7 +17,7 @@
             android:layout_gravity="right|center_vertical"
             android:layout_marginRight="30dp"
             android:textColor="#000000"
-            android:text="CPU 대사"/>
+            android:text="User 대사"/>
     </FrameLayout>
     <FrameLayout
         android:layout_width="match_parent"

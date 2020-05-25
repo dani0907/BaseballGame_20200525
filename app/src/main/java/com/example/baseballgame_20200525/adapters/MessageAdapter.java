@@ -35,5 +35,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
         if(row == null){
             row = inf.inflate(R.layout.message_list_item, null);
         }
+
+        return row;
     }
 }
