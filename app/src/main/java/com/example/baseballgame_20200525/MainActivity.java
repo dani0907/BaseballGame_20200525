@@ -124,7 +124,7 @@ public class MainActivity extends BaseActivity {
 //        String=> int로 변경 => int[] 3자리로 변경.
         int inputNum = Integer.parseInt(inputVal);
 
-        int[] myNumbers = new Int[3];
+        int[] myNumbers = new int[3];
         myNumbers[0] = inputNum / 100;
         myNumbers[1] = inputNum / 10 % 10;
         myNumbers[2] = inputNum % 10;
@@ -152,6 +152,11 @@ public class MainActivity extends BaseActivity {
                 }
             }
 
-            }
+        }
+
+//        컴퓨터가 ?s?b인지 답장하고, 밑으로 끌어내리기.
+        messages.add(new Message(String.format("%dS %dB 입니다.",strikeCount,ballCount),"Cpu"));
+        messageAdapter.notifyDataSetChanged();
+        binding.messageListView.smoothScrollToPosition(messages.size()-1);
     }
 }
